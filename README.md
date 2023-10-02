@@ -37,5 +37,5 @@ A Nextflow pipeline to perform quality control of sequencing data.
 - Option to skip FastQ Screen: </br>
 `--skip_fastq_screen`</br>
 
-- Option to skip FastQ Screen: </br>
+- Option to skip Trim Galore: </br>
 `--skip_trim_galore`
