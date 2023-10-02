@@ -1,0 +1,169 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/vonMeyennLab/qc_nme/main/nextflow_schema.json",
+    "title": "QC pipeline parameters",
+    "description": "Sequencing quality control pipeline.",
+    "type": "object",
+
+    "definitions": {
+
+        "input_output_options": {
+            "title": "Input/output options",
+            "type":  "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir"],
+            "properties": {
+
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "mimetype": "text/plain",
+                    "description": "Path to the folder where the FASTQ files are located. You have to use an absolute path and list the files by using a wildcard or the name of a single file.\n\nFor example: /cluster/work/nme/data/josousa/project/fastq/*fastq.gz",
+                    "fa_icon": "fas fa-file-code"
+                },
+
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use an absolute path.",
+                    "fa_icon": "fas fa-folder-open"
+                }
+
+            }
+        },
+
+        "fastq_screen_options": {
+            "title": "FastQ Screen options",
+            "type": "object",
+            "fa_icon": "fas fa-users-cog",
+            "description": "Choose the FastQ Screen options.",
+            "properties": {
+
+                "fastq_screen_conf": {
+                    "type": "string",
+                    "default": "/cluster/work/nme/software/config/fastq_screen.conf",
+                    "description": "FastQ Screen config file directory.",
+                    "fa_icon": "fas fa-book"
+                },
+
+                "bisulfite": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Bisulfite sequencing.",
+                    "help_text": "fastq_screen_args='--bisulfite'",
+                    "default": false
+                }
+
+            }
+        },
+
+        "trim_galore_options": {
+            "title": "Trim Galore options",
+            "type": "object",
+            "fa_icon": "fas fa-users-cog",
+            "description": "Choose the Trim Galore options.",
+            "properties": {
+
+                "singlecell": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Single-cell sequencing.",
+                    "help_text": "trim_galore_args='--clip_R1 6 --clip_R2 6'",
+                    "default": false
+                },
+
+                "pbat": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "PBAT sequencing.",
+                    "help_text": "trim_galore_args='--clip_R1 9 --clip_R2 9'",
+                    "default": false
+                },
+
+                "rrbs": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "RRBS sequencing.",
+                    "help_text": "trim_galore_args='--rrbs'",
+                    "default": false
+                }
+
+            }
+        },
+        
+        "process_skipping_options": {
+            "title": "Process skipping options",
+            "type": "object",
+            "fa_icon": "fas fa-fast-forward",
+            "description": "Skip steps within the workflow.",
+            "properties": {
+
+                "skip_fastq_screen": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip FastQ Screen.",
+                    "default": false
+                },
+
+                "skip_trim_galore": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip Trim Galore.",
+                    "default": false
+                }
+            }
+        },
+
+        "module_arguments_options": {
+            "title": "Module arguments options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Add extra arguments to the workflow modules.",
+            "properties": {
+
+                "fastqc_args": {
+                    "type": "string",
+                    "description": "FastQC arguments.",
+                    "fa_icon": "fas fa-file-code"
+                },
+
+                "fastq_screen_args": {
+                    "type": "string",
+                    "description": "FastQ Screen arguments.",
+                    "fa_icon": "fas fa-file-code"
+                },
+
+                "trim_galore_args": {
+                    "type": "string",
+                    "description": "Trim Galore arguments.",
+                    "fa_icon": "fas fa-file-code"
+                },
+
+                "multiqc_args": {
+                    "type": "string",
+                    "description": "MultiQC arguments.",
+                    "fa_icon": "fas fa-file-code"
+                }
+            }
+        }
+
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/fastq_screen_options"
+        },
+        {
+            "$ref": "#/definitions/trim_galore_options"
+        },
+        {
+            "$ref": "#/definitions/process_skipping_options"
+        },
+        {
+            "$ref": "#/definitions/module_arguments_options"
+        }
+    ]
+}    
