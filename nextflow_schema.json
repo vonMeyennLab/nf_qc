@@ -76,7 +76,7 @@
                 "pbat": {
                     "type": "boolean",
                     "fa_icon": "fas fa-file-code",
-                    "description": "PBAT sequencing. If this option is selected, the optional parameter ```--bisulfite``` will automatically be set to `true`",
+                    "description": "PBAT sequencing. If this option is selected, the FastQ Screen optional parameter --bisulfite will be automatically selected.",
                     "help_text": "trim_galore_args='--clip_R1 9 --clip_R2 9'",
                     "default": false
                 },
