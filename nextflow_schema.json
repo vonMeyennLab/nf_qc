@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/vonMeyennLab/qc_nme/main/nextflow_schema.json",
+    "$id": "https://raw.githubusercontent.com/vonMeyennLab/nf_qc/main/nextflow_schema.json",
     "title": "QC pipeline parameters",
     "description": "Sequencing quality control pipeline.",
     "type": "object",
@@ -49,7 +49,7 @@
 
                 "bisulfite": {
                     "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
+                    "fa_icon": "fas fa-file-code",
                     "description": "Bisulfite sequencing.",
                     "help_text": "fastq_screen_args='--bisulfite'",
                     "default": false
@@ -67,7 +67,7 @@
 
                 "singlecell": {
                     "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
+                    "fa_icon": "fas fa-file-code",
                     "description": "Single-cell sequencing.",
                     "help_text": "trim_galore_args='--clip_R1 6 --clip_R2 6'",
                     "default": false
@@ -75,15 +75,15 @@
 
                 "pbat": {
                     "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
-                    "description": "PBAT sequencing.",
+                    "fa_icon": "fas fa-file-code",
+                    "description": "PBAT sequencing. If this option is selected, the optional parameter ```--bisulfite``` will automatically be set to `true`",
                     "help_text": "trim_galore_args='--clip_R1 9 --clip_R2 9'",
                     "default": false
                 },
 
                 "rrbs": {
                     "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
+                    "fa_icon": "fas fa-file-code",
                     "description": "RRBS sequencing.",
                     "help_text": "trim_galore_args='--rrbs'",
                     "default": false

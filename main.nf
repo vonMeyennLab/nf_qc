@@ -32,12 +32,18 @@ params.skip_trim_galore  = false
 ======================================================================================== */
 params.fastq_screen_conf = "/cluster/work/nme/software/config/fastq_screen.conf" // FastQ Screen config file directory
 params.bisulfite         = false
+bisulfite                = params.bisulfite
 params.singlecell        = false
 params.rrbs		         = false
 params.pbat		         = false
 params.verbose           = false
 params.single_end        = false  // default mode is auto-detect. NOTE: params are handed over automatically  
 params.help              = false
+
+// If the option PBAT is selected, the bisulfite option will automatically be set to true
+if(params.pbat){
+    bisulfite = true
+} 
 
 params.fastqc_args       = ''
 params.fastq_screen_args = ''
@@ -74,7 +80,7 @@ file_ch = makeFilesChannel(input_files)
 ======================================================================================== */
 include { FASTQC }            from './modules/fastqc.mod.nf'
 include { FASTQC as FASTQC2 } from './modules/fastqc.mod.nf'
-include { FASTQ_SCREEN }      from './modules/fastq_screen.mod.nf' params(fastq_screen_conf: params.fastq_screen_conf, bisulfite: params.bisulfite)
+include { FASTQ_SCREEN }      from './modules/fastq_screen.mod.nf' params(fastq_screen_conf: params.fastq_screen_conf, bisulfite: bisulfite)
 include { TRIM_GALORE }       from './modules/trim_galore.mod.nf'  params(singlecell: params.singlecell, rrbs: params.rrbs, pbat: params.pbat)
 include { MULTIQC }           from './modules/multiqc.mod.nf' 
 

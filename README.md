@@ -10,6 +10,7 @@ A Nextflow pipeline to perform quality control of sequencing data.
 2. [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)</br>
 3. [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)</br>
 4. [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+5. [MultiQC](https://multiqc.info/)
 
 
 ### Required parameters
@@ -22,20 +23,37 @@ A Nextflow pipeline to perform quality control of sequencing data.
 - Option to provide a custom FastQ Screen config file.</br>
 `--fastq_screen_conf` _[default: /cluster/work/nme/software/config/fastq_screen.conf]_</br>
 
-- Option to pass the option --bisulfite to FastQ Screen. This will result with FastQ Screen having the arguments: fastq_screen_args='--bisulfite'</br>
+- Option to pass the option --bisulfite to FastQ Screen. This will result with FastQ Screen having the arguments: fastq_screen_args='--bisulfite'.</br>
 `--bisulfite`</br>
 
-- Option to define sequencing data as **single-cell**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 6 --clip_R2 6'</br>
+- Option to define sequencing data as **single-cell**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 6 --clip_R2 6'.</br>
 `--singlecell`</br>
 
-- Option to define sequencing data as **PBAT**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 9 --clip_R2 9'</br>
+- Option to define sequencing data as **PBAT**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 9 --clip_R2 9'.</br>
 `--pbat`</br>
+    > If this option is selected, the optional parameter `--bisulfite` will automatically be set to `true`.
 
-- Option to define sequencing data as **RRBS**. This will result with Trim Galore having the arguments: trim_galore_args='--rrbs'</br>
+- Option to define sequencing data as **RRBS**. This will result with Trim Galore having the arguments: trim_galore_args='--rrbs'.</br>
 `--rrbs`</br>
 
-- Option to skip FastQ Screen: </br>
+### Skipping options
+
+- Option to skip FastQ Screen. </br>
 `--skip_fastq_screen`</br>
 
-- Option to skip Trim Galore: </br>
+- Option to skip Trim Galore. </br>
 `--skip_trim_galore`
+
+### Extra arguments
+
+- Option to add extra arguments to the package [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</br>
+`--fastqc_args`</br>
+
+- Option to add extra arguments to the package [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/).</br>
+`--fastq_screen_args`</br>
+
+- Option to add extra arguments to the package [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).</br>
+`--trim_galore_args`
+
+- Option to add extra arguments to the package [MultiQC](https://multiqc.info/).</br>
+`--multiqc_args`
