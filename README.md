@@ -14,8 +14,8 @@ A Nextflow pipeline to perform quality control of sequencing data.
 
 
 ### Required parameters
-
 `--input` _Path to the folder where the FASTQ files are located. For example: /cluster/work/nme/data/josousa/project/fastq/*fastq.gz_</br>
+
 `--outdir` _output directory where the files will be saved._
 
 
@@ -36,16 +36,16 @@ A Nextflow pipeline to perform quality control of sequencing data.
 - Option to define sequencing data as **RRBS**. This will result with Trim Galore having the arguments: trim_galore_args='--rrbs'.</br>
 `--rrbs`</br>
 
-### Skipping options
 
+### Skipping options
 - Option to skip FastQ Screen. </br>
 `--skip_fastq_screen`</br>
 
 - Option to skip Trim Galore. </br>
 `--skip_trim_galore`
 
-### Extra arguments
 
+### Extra arguments
 - Option to add extra arguments to the package [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</br>
 `--fastqc_args`</br>
 
