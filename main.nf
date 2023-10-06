@@ -45,6 +45,11 @@ if(params.pbat){
     bisulfite = true
 } 
 
+// If the option RRBS is selected, the bisulfite option will automatically be set to true
+if(params.rrbs){
+    bisulfite = true
+} 
+
 params.fastqc_args       = ''
 params.fastq_screen_args = ''
 params.trim_galore_args  = ''

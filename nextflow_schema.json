@@ -84,7 +84,7 @@
                 "rrbs": {
                     "type": "boolean",
                     "fa_icon": "fas fa-file-code",
-                    "description": "RRBS sequencing.",
+                    "description": "RRBS sequencing. If this option is selected, the FastQ Screen optional parameter --bisulfite will be automatically selected.",
                     "help_text": "trim_galore_args='--rrbs'",
                     "default": false
                 }

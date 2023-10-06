@@ -35,6 +35,7 @@ A Nextflow pipeline to perform quality control of sequencing data.
 
 - Option to define sequencing data as **RRBS**. This will result with Trim Galore having the arguments: trim_galore_args='--rrbs'.</br>
 `--rrbs`</br>
+    > If this option is selected, the optional parameter `--bisulfite` will automatically be set to `true`.
 
 
 ### Skipping options
