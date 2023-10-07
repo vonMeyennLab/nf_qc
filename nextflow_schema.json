@@ -37,13 +37,13 @@
             "title": "Sequencing type options",
             "type": "object",
             "fa_icon": "fas fa-users-cog",
-            "description": "Choose the bisulfite sequencing type.",
+            "description": "Choose the sequencing type to change the default parameters.",
             "properties": {
 
                 "seqtype": {
                     "type": "string",
                     "default": "",
-                    "description": "Name of the bisulfite sequencing type.",
+                    "description": "Name of the sequencing type.",
                     "fa_icon": "fas fa-book",
                     "help_text": "The default values for each sequencing type.\n\nPBAT: \n\nfastq_screen_args='--bisulfite' \n\ntrim_galore_args='--clip_R1 9 --clip_R2 9' \n\nRRBS: \n\nfastq_screen_args='--bisulfite' \n\ntrim_galore_args='--rrbs' \n\nSingle-cell: \n\ntrim_galore_args='--clip_R1 6 --clip_R2 6'",
                     "enum": ["PBAT", "RRBS", "Single-cell"]
