@@ -28,48 +28,75 @@ params.skip_trim_galore  = false
 
 
 /* ========================================================================================
-    PARAMETERS
+    DEFAULT PARAMETERS
 ======================================================================================== */
-params.fastq_screen_conf = "/cluster/work/nme/software/config/fastq_screen.conf" // FastQ Screen config file directory
-params.bisulfite         = false
-bisulfite                = params.bisulfite
-params.singlecell        = false
-params.rrbs		         = false
-params.pbat		         = false
-params.verbose           = false
-params.single_end        = false  // default mode is auto-detect. NOTE: params are handed over automatically  
-params.help              = false
-
-// If the option PBAT is selected, the bisulfite option will automatically be set to true
-if(params.pbat){
-    bisulfite = true
-} 
-
-// If the option RRBS is selected, the bisulfite option will automatically be set to true
-if(params.rrbs){
-    bisulfite = true
-} 
-
 params.fastqc_args       = ''
 params.fastq_screen_args = ''
 params.trim_galore_args  = ''
 params.multiqc_args      = ''
 
+fastqc_args       = params.fastqc_args
+fastq_screen_args = params.fastq_screen_args
+trim_galore_args  = params.trim_galore_args
+multiqc_args      = params.multiqc_args
+
+// Sequencing type
+params.seqtype = ''
+
+// FastQ Screen config file directory
+params.fastq_screen_conf = "/cluster/work/nme/software/config/fastq_screen.conf" 
+
+// FastQ Screen bisulfite parameter
+params.bisulfite = false
+bisulfite = params.bisulfite
+
+// Trim Galore clip parameter
+params.clip_r1 = false
+params.clip_r2 = false
+clip_r1        = params.clip_r1
+clip_r2        = params.clip_r2
+
 
 /* ========================================================================================
-    MESSAGES
+    TRIM GALORE PARAMETERS
 ======================================================================================== */
-// Show help message and exit
-if (params.help){
-    helpMessage()
-    exit 0
+
+// PBAT
+if(params.seqtype == 'PBAT'){
+    clip_r1 = 9
+    clip_r2 = clip_r1
+    bisulfite = true
+
+    trim_galore_args += " --clip_r1 $clip_r1 "
 }
 
-if (params.verbose){
-    println ("[WORKFLOW] FASTQC ARGS: "           + params.fastqc_args)
-    println ("[WORKFLOW] FASTQ SCREEN ARGS ARE: " + params.fastq_screen_args)
-    println ("[WORKFLOW] TRIM GALORE ARGS: "      + params.trim_galore_args)
-    println ("[WORKFLOW] MULTIQC ARGS: "          + params.multiqc_args)
+// RRBS
+if(params.seqtype == 'RRBS'){
+    bisulfite = true
+    trim_galore_args += " --rrbs "
+}
+
+// SINGLE-CELL
+if(params.seqtype == 'Single-cell'){
+    clip_r1 = 6
+    clip_r2 = clip_r1
+    bisulfite = false
+
+    trim_galore_args += " --clip_r1 $clip_r1 "
+}
+
+
+/* ========================================================================================
+    FASTQ SCREEN PARAMETERS
+======================================================================================== */
+
+// BISULFITE
+if (params.bisulfite){
+	fastq_screen_args += " --bisulfite "
+} else {
+    if (bisulfite){
+	fastq_screen_args += " --bisulfite "
+    }
 }
 
 
@@ -85,9 +112,9 @@ file_ch = makeFilesChannel(input_files)
 ======================================================================================== */
 include { FASTQC }            from './modules/fastqc.mod.nf'
 include { FASTQC as FASTQC2 } from './modules/fastqc.mod.nf'
-include { FASTQ_SCREEN }      from './modules/fastq_screen.mod.nf' params(fastq_screen_conf: params.fastq_screen_conf, bisulfite: bisulfite)
-include { TRIM_GALORE }       from './modules/trim_galore.mod.nf'  params(singlecell: params.singlecell, rrbs: params.rrbs, pbat: params.pbat)
-include { MULTIQC }           from './modules/multiqc.mod.nf' 
+include { FASTQ_SCREEN }      from './modules/fastq_screen.mod.nf' params(fastq_screen_conf: params.fastq_screen_conf)
+include { TRIM_GALORE }       from './modules/trim_galore.mod.nf'  params(clip_r2: clip_r2)
+include { MULTIQC }           from './modules/multiqc.mod.nf'
 
 workflow {
 
@@ -96,15 +123,15 @@ workflow {
 
             if (!params.skip_trim_galore){
 
-                FASTQC                      (file_ch, outdir, params.fastqc_args, params.verbose)
-                FASTQ_SCREEN                (file_ch, outdir, params.fastq_screen_args, params.verbose)
-                TRIM_GALORE                 (file_ch, outdir, params.trim_galore_args, params.verbose)
-                FASTQC2                     (TRIM_GALORE.out.reads, outdir, params.fastqc_args, params.verbose)
+                FASTQC                      (file_ch, outdir, fastqc_args)
+                FASTQ_SCREEN                (file_ch, outdir, fastq_screen_args)
+                TRIM_GALORE                 (file_ch, outdir, trim_galore_args)
+                FASTQC2                     (TRIM_GALORE.out.reads, outdir, fastqc_args)
 
             } else {
 
-                FASTQC                      (file_ch, outdir, params.fastqc_args, params.verbose)
-                FASTQ_SCREEN                (file_ch, outdir, params.fastq_screen_args, params.verbose)
+                FASTQC                      (file_ch, outdir, fastqc_args)
+                FASTQ_SCREEN                (file_ch, outdir, fastq_screen_args)
 
             }    
 
@@ -112,13 +139,13 @@ workflow {
 
             if (!params.skip_trim_galore){
 
-            FASTQC                      (file_ch, outdir, params.fastqc_args, params.verbose)
-            TRIM_GALORE                 (file_ch, outdir, params.trim_galore_args, params.verbose)
-            FASTQC2                     (TRIM_GALORE.out.reads, outdir, params.fastqc_args, params.verbose)
+            FASTQC                      (file_ch, outdir, fastqc_args)
+            TRIM_GALORE                 (file_ch, outdir, trim_galore_args)
+            FASTQC2                     (TRIM_GALORE.out.reads, outdir, fastqc_args)
 
             } else {
 
-            FASTQC                      (file_ch, outdir, params.fastqc_args, params.verbose)
+            FASTQC                      (file_ch, outdir, fastqc_args)
             
             }
 
@@ -163,7 +190,7 @@ workflow {
 
         }
 
-        MULTIQC      (multiqc_ch, outdir, params.multiqc_args, params.verbose)
+        MULTIQC      (multiqc_ch, outdir, multiqc_args)
 }
 
 workflow.onComplete {

@@ -33,6 +33,25 @@
             }
         },
 
+        "sequencing_type_options": {
+            "title": "Sequencing type options",
+            "type": "object",
+            "fa_icon": "fas fa-users-cog",
+            "description": "Choose the bisulfite sequencing type.",
+            "properties": {
+
+                "seqtype": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Name of the bisulfite sequencing type.",
+                    "fa_icon": "fas fa-book",
+                    "help_text": "The default values for each sequencing type.\n\nPBAT: \n\nfastq_screen_args='--bisulfite' \n\ntrim_galore_args='--clip_R1 9 --clip_R2 9' \n\nRRBS: \n\nfastq_screen_args='--bisulfite' \n\ntrim_galore_args='--rrbs' \n\nSingle-cell: \n\ntrim_galore_args='--clip_R1 6 --clip_R2 6'",
+                    "enum": ["PBAT", "RRBS", "Single-cell"]
+                }
+
+            }
+        },
+
         "fastq_screen_options": {
             "title": "FastQ Screen options",
             "type": "object",
@@ -52,40 +71,6 @@
                     "fa_icon": "fas fa-file-code",
                     "description": "Bisulfite sequencing.",
                     "help_text": "fastq_screen_args='--bisulfite'",
-                    "default": false
-                }
-
-            }
-        },
-
-        "trim_galore_options": {
-            "title": "Trim Galore options",
-            "type": "object",
-            "fa_icon": "fas fa-users-cog",
-            "description": "Choose the Trim Galore options.",
-            "properties": {
-
-                "singlecell": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-file-code",
-                    "description": "Single-cell sequencing.",
-                    "help_text": "trim_galore_args='--clip_R1 6 --clip_R2 6'",
-                    "default": false
-                },
-
-                "pbat": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-file-code",
-                    "description": "PBAT sequencing. If this option is selected, the FastQ Screen optional parameter --bisulfite will be automatically selected.",
-                    "help_text": "trim_galore_args='--clip_R1 9 --clip_R2 9'",
-                    "default": false
-                },
-
-                "rrbs": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-file-code",
-                    "description": "RRBS sequencing. If this option is selected, the FastQ Screen optional parameter --bisulfite will be automatically selected.",
-                    "help_text": "trim_galore_args='--rrbs'",
                     "default": false
                 }
 
@@ -157,7 +142,7 @@
             "$ref": "#/definitions/fastq_screen_options"
         },
         {
-            "$ref": "#/definitions/trim_galore_options"
+            "$ref": "#/definitions/sequencing_type_options"
         },
         {
             "$ref": "#/definitions/process_skipping_options"
