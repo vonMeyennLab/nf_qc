@@ -37,8 +37,8 @@ process TRIM_GALORE {
 		if (reads instanceof List){
 			trim_galore_args += " --paired "
 
-			if ($params.clip_r2){
-				trim_galore_args += " --clip_r2 $params.clip_r2 "
+			if (params.clip_r2){
+				trim_galore_args += " --clip_r2 ${params.clip_r2} "
 			}
 		}
 

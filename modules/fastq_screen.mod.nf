@@ -39,6 +39,6 @@ process FASTQ_SCREEN {
 		"""
 		module load fastq_screen
 
-		fastq_screen --conf $params.fastq_screen_conf $fastq_screen_args $reads
+		fastq_screen --conf ${params.fastq_screen_conf} $fastq_screen_args $reads
 		"""
 }
