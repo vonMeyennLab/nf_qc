@@ -7,6 +7,7 @@ nextflow.enable.dsl=2
 ======================================================================================== */
 process FASTQC {
 
+	label 'fastqc'
 	tag "$name" // Adds name to job submission
 
 	input:
@@ -25,6 +26,6 @@ process FASTQC {
 		"""
 		module load fastqc
 
-		fastqc $fastqc_args -q -t 2 ${reads}
+		fastqc $fastqc_args --quiet --threads ${task.cpus} ${reads}
 		"""
 }
