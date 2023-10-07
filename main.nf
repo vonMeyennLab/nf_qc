@@ -123,15 +123,15 @@ workflow {
 
             if (!params.skip_trim_galore){
 
-                FASTQC                      (file_ch, outdir, fastqc_args)
-                FASTQ_SCREEN                (file_ch, outdir, fastq_screen_args)
-                TRIM_GALORE                 (file_ch, outdir, trim_galore_args)
-                FASTQC2                     (TRIM_GALORE.out.reads, outdir, fastqc_args)
+                FASTQC        (file_ch, outdir, fastqc_args)
+                FASTQ_SCREEN  (file_ch, outdir, fastq_screen_args)
+                TRIM_GALORE   (file_ch, outdir, trim_galore_args)
+                FASTQC2       (TRIM_GALORE.out.reads, outdir, fastqc_args)
 
             } else {
 
-                FASTQC                      (file_ch, outdir, fastqc_args)
-                FASTQ_SCREEN                (file_ch, outdir, fastq_screen_args)
+                FASTQC        (file_ch, outdir, fastqc_args)
+                FASTQ_SCREEN  (file_ch, outdir, fastq_screen_args)
 
             }    
 
@@ -139,13 +139,13 @@ workflow {
 
             if (!params.skip_trim_galore){
 
-            FASTQC                      (file_ch, outdir, fastqc_args)
-            TRIM_GALORE                 (file_ch, outdir, trim_galore_args)
-            FASTQC2                     (TRIM_GALORE.out.reads, outdir, fastqc_args)
+            FASTQC      (file_ch, outdir, fastqc_args)
+            TRIM_GALORE (file_ch, outdir, trim_galore_args)
+            FASTQC2     (TRIM_GALORE.out.reads, outdir, fastqc_args)
 
             } else {
 
-            FASTQC                      (file_ch, outdir, fastqc_args)
+            FASTQC      (file_ch, outdir, fastqc_args)
             
             }
 
@@ -190,7 +190,7 @@ workflow {
 
         }
 
-        MULTIQC      (multiqc_ch, outdir, multiqc_args)
+        MULTIQC (multiqc_ch, outdir, multiqc_args)
 }
 
 workflow.onComplete {
