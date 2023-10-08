@@ -1,5 +1,5 @@
 reports:
-  "**/multiqc_report.html":
+  multiqc_report.html:
     display: "MultiQC HTML report"
   "**/*_screen.html":
     display: "FastQ Screen HTML report"
