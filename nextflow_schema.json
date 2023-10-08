@@ -37,7 +37,7 @@
             "title": "Sequencing type options",
             "type": "object",
             "fa_icon": "fas fa-users-cog",
-            "description": "Choose the sequencing type to change the default parameters.",
+            "description": "Choose the sequencing type. This will change the default parameters.",
             "properties": {
 
                 "seqtype": {
