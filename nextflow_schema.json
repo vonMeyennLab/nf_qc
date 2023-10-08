@@ -28,7 +28,7 @@
                     "fa_icon": "fas fa-users-cog",
                     "description": "Force the pipeline to assign input as single-end. As default, the pipeline detects if the input files are single-end or paired-end.",
                     "default": false
-                }
+                },
 
                 "outdir": {
                     "type": "string",
