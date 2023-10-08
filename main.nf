@@ -40,6 +40,9 @@ fastq_screen_args = params.fastq_screen_args
 trim_galore_args  = params.trim_galore_args
 multiqc_args      = params.multiqc_args
 
+// Force to input files to be  single-end
+params.single_end = false
+
 // Sequencing type
 params.seqtype = ''
 
@@ -184,7 +187,7 @@ workflow {
 
             } else {
 
-            multiqc_ch = FASTQC.out.report()
+            multiqc_ch = FASTQC.out.report.collect()
             
             }
 
