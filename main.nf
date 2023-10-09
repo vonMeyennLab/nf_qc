@@ -187,7 +187,7 @@ workflow {
 
             } else {
 
-            multiqc_ch = FASTQC.out.report.collect()
+            multiqc_ch = FASTQC.out.report
             
             }
 
