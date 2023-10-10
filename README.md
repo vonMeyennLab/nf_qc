@@ -19,35 +19,57 @@ Path to the folder where the FASTQ files are located.
 --input /cluster/work/nme/data/josousa/project/fastq/*fastq.gz
 ```
 
-
 Output directory where the files will be saved.
 `--outdir`
 ``` bash
 --outdir /cluster/work/nme/data/josousa/project
 ```
 
-## Optional parameters
+## Input optional parameters
+
+- Option to force the pipeline to assign input as single-end.
+`--single_end`
+
+    _By default, the pipeline detects whether the input files are single-end or paired-end._
+
+## FastQ Screen optional parameters
+
 - Option to provide a custom FastQ Screen config file.
 `--fastq_screen_conf`
-``` bash
-# Default
---fastq_screen_conf /cluster/work/nme/software/config/fastq_screen.conf
-```
+    ``` bash
+    # Default
+    --fastq_screen_conf /cluster/work/nme/software/config/fastq_screen.conf
+    ```
 
-- Option to pass the option --bisulfite to FastQ Screen. This will result with FastQ Screen having the arguments: fastq_screen_args='--bisulfite'.
+- Option to pass the option --bisulfite to FastQ Screen. 
 `--bisulfite`
 
-- Option to define sequencing data as **single-cell**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 6 --clip_R2 6'.
-`--singlecell`
+## Sequencing type optional parameters
 
-- Option to define sequencing data as **PBAT**. This will result with Trim Galore having the arguments: trim_galore_args='--clip_R1 9 --clip_R2 9'.
-`--pbat`
-    > If this option is selected, the optional parameter `--bisulfite` will automatically be set to `true`.
+- Option to choose the sequencing type. This will change the default parameters.
+    ``` bash
+    # PBAT
+    --seqtype PBAT
 
-- Option to define sequencing data as **RRBS**. This will result with Trim Galore having the arguments: trim_galore_args='--rrbs'.
-`--rrbs`
-    > If this option is selected, the optional parameter `--bisulfite` will automatically be set to `true`.
+    # RRBS
+    --seqtype RRBS
 
+    # Single-cell
+    --seqtype Single-cell
+    ```
+
+The default parameters for each sequencing type.
+
+PBAT: 
+>fastq_screen_args='--bisulfite'<br>
+>trim_galore_args='--clip_R1 9 --clip_R2 9'
+
+RRBS:
+>fastq_screen_args='--bisulfite'<br>
+>trim_galore_args='--rrbs'
+
+Single-cell:
+>trim_galore_args='--clip_R1 6 --clip_R2 6'
 
 ## Skipping options
 - Option to skip FastQ Screen. 
