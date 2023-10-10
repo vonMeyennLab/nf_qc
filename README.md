@@ -91,3 +91,6 @@ Single-cell:
 
 - Option to add extra arguments to the package [MultiQC](https://multiqc.info/).
 `--multiqc_args`
+
+## Acknowledgements
+This pipeline was adapted from the Nextflow pipelines created by the [Babraham Institute Bioinformatics Group](https://github.com/s-andrews/nextflow_pipelines) and from the [nf-core](https://nf-co.re/) pipelines. We thank all the contributors for both projects. We also thank the [Nextflow community](https://nextflow.slack.com/join) and the [nf-core community](https://nf-co.re/join) for all the help and support.
