@@ -1,6 +1,7 @@
 # Sequencing QC Pipeline
 
-<img width="40%" src="https://raw.githubusercontent.com/nextflow-io/trademark/master/nextflow2014_no-bg.png" />
+<img width="30%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/ETH_Z%C3%BCrich_Logo_black.svg/1024px-ETH_Z%C3%BCrich_Logo_black.svg.png" />
+<img width="30%" src="https://raw.githubusercontent.com/nextflow-io/trademark/master/nextflow2014_no-bg.png" />
 
 A Nextflow pipeline to perform quality control of sequencing data.
 
@@ -44,21 +45,21 @@ Output directory where the files will be saved.
 - Option to pass the option --bisulfite to FastQ Screen.
 `--bisulfite`
 
-## Sequencing type optional parameters
+## Sequencing method optional parameters
 
-- Option to choose the sequencing type. This will change the default parameters.
+- Option to choose the sequencing method. This will adapt the default parameters to the method.
     ``` bash
     # PBAT
-    --seqtype PBAT
+    --seq_method PBAT
 
     # RRBS
-    --seqtype RRBS
+    --seq_method RRBS
 
     # Single-cell
-    --seqtype Single-cell
+    --seq_method Single-cell
     ```
 
-The default parameters for each sequencing type.
+The default parameters for each sequencing method.
 
 PBAT: 
 >fastq_screen_args='--bisulfite'<br>
@@ -91,6 +92,9 @@ Single-cell:
 
 - Option to add extra arguments to the package [MultiQC](https://multiqc.info/).
 `--multiqc_args`
+
+## Additional information
+The pipeline was created to run in the [ETH Euler cluster](https://scicomp.ethz.ch/wiki/Euler) and it relies on the [Lmod environmental modules](https://lmod.readthedocs.io/en/latest/) available in the cluster. Thus, the pipeline needs to be adapted before running it in another HPC cluster.
 
 ## Acknowledgements
 This pipeline was adapted from the Nextflow pipelines created by the [Babraham Institute Bioinformatics Group](https://github.com/s-andrews/nextflow_pipelines) and from the [nf-core](https://nf-co.re/) pipelines. We thank all the contributors for both projects. We also thank the [Nextflow community](https://nextflow.slack.com/join) and the [nf-core community](https://nf-co.re/join) for all the help and support.

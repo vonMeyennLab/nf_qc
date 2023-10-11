@@ -40,11 +40,11 @@ fastq_screen_args = params.fastq_screen_args
 trim_galore_args  = params.trim_galore_args
 multiqc_args      = params.multiqc_args
 
-// Force to input files to be  single-end
+// Force to input files to be single-end
 params.single_end = false
 
-// Sequencing type
-params.seqtype = ''
+// Sequencing method
+params.seq_method = ''
 
 // FastQ Screen config file directory
 params.fastq_screen_conf = "/cluster/work/nme/software/config/fastq_screen.conf" 
@@ -65,7 +65,7 @@ clip_r2        = params.clip_r2
 ======================================================================================== */
 
 // PBAT
-if(params.seqtype == 'PBAT'){
+if(params.seq_method == 'PBAT'){
     clip_r1 = 9
     clip_r2 = clip_r1
     bisulfite = true
@@ -74,13 +74,13 @@ if(params.seqtype == 'PBAT'){
 }
 
 // RRBS
-if(params.seqtype == 'RRBS'){
+if(params.seq_method == 'RRBS'){
     bisulfite = true
     trim_galore_args += " --rrbs "
 }
 
 // SINGLE-CELL
-if(params.seqtype == 'Single-cell'){
+if(params.seq_method == 'Single-cell'){
     clip_r1 = 6
     clip_r2 = clip_r1
     bisulfite = false
@@ -194,21 +194,4 @@ workflow {
         }
 
         MULTIQC (multiqc_ch, outdir, multiqc_args)
-}
-
-workflow.onComplete {
-
-    def msg = """\
-        Pipeline execution summary
-        ---------------------------
-        Jobname     : ${workflow.runName}
-        Completed at: ${workflow.complete}
-        Duration    : ${workflow.duration}
-        Success     : ${workflow.success}
-        workDir     : ${workflow.workDir}
-        exit status : ${workflow.exitStatus}
-        """
-    .stripIndent()
-
-    sendMail(to: "${workflow.userName}@ethz.ch", subject: 'Minimal pipeline execution report', body: msg)
 }
