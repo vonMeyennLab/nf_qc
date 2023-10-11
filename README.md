@@ -1,7 +1,7 @@
 # Sequencing QC Pipeline
 
-<img width="30%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/ETH_Z%C3%BCrich_Logo_black.svg/1024px-ETH_Z%C3%BCrich_Logo_black.svg.png" />
 <img width="30%" src="https://raw.githubusercontent.com/nextflow-io/trademark/master/nextflow2014_no-bg.png" />
+<img width="30%" src="https://tower.nf/assets/nf-tower-white.svg" />
 
 A Nextflow pipeline to perform quality control of sequencing data.
 
