@@ -43,7 +43,7 @@ Output directory where the files will be saved.
     --fastq_screen_conf '/cluster/work/nme/software/config/fastq_screen.conf'
     ```
 
-- Option to pass the option --bisulfite to FastQ Screen.
+- Option to pass the flag --bisulfite to FastQ Screen.
 `--bisulfite`
 
 ## Sequencing method optional parameters
