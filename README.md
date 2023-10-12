@@ -33,7 +33,7 @@ Output directory where the files will be saved.
 - Option to force the pipeline to assign input as single-end.
 `--single_end`
 
-    _By default, the pipeline detects whether the input files are single-end or paired-end._
+    >_By default, the pipeline detects whether the input files are single-end or paired-end._
 
 ## FastQ Screen optional parameters
 
