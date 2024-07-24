@@ -15,21 +15,20 @@ A Nextflow pipeline to perform quality control of sequencing data.
 ## Required parameters
 
 Path to the folder where the FASTQ files are located.
-`--input`
 ``` bash
 --input /cluster/work/nme/data/josousa/project/fastq/*fastq.gz
 ```
 
 Output directory where the files will be saved.
-`--outdir`
 ``` bash
 --outdir /cluster/work/nme/data/josousa/project
 ```
 
-## Input optional parameters
+### Input optional parameters
 
 - Option to force the pipeline to assign input as single-end.
-`--single_end`
+
+    `--single_end`
 
     >_By default, the pipeline detects whether the input files are single-end or paired-end._
 
@@ -42,7 +41,8 @@ Output directory where the files will be saved.
     ```
 
 - Option to pass the flag --bisulfite to FastQ Screen.
-`--bisulfite`
+
+    `--bisulfite`
 
 ## Sequencing method optional parameters
 
